@@ -46,6 +46,13 @@ export const footerData = {
     },
   ],
   copyright: "pixfort © All rights reserved",
+  carouselItems: [
+    { type: "text", text: "Wow!" },
+    { type: "icon", icon: "phone-chat", ariaLabel: "Mobile Chat" },
+    { type: "text", text: "Create Apps" },
+    { type: "icon", icon: "plus-circle", ariaLabel: "Plus Circle" },
+  ],
 };
 
 export default footerData;
+

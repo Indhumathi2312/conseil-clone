@@ -7,6 +7,7 @@ import AwardBadges from "./AwardBadges";
 export default function HeroSection() {
   return (
     <section
+      id="hero-section"
       className="relative pt-28 sm:pt-36 md:pt-40 lg:pt-44 pb-20 sm:pb-28 lg:pb-32 overflow-hidden"
       style={{
         background:

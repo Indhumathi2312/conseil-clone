@@ -56,6 +56,28 @@ export default function AppShowcaseSection() {
           box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.18);
         }
 
+        #pix_section_showcase .carousel-zoom-wrapper {
+          transition: transform 500ms cubic-bezier(0.25, 1, 0.5, 1);
+          transform-origin: center center;
+          cursor: pointer !important;
+        }
+
+        #pix_section_showcase .carousel-zoom-wrapper:hover {
+          transform: scale(0.92);
+        }
+
+        #pix_section_showcase .swiper,
+        #pix_section_showcase .swiper-wrapper,
+        #pix_section_showcase .swiper-slide,
+        #pix_section_showcase .swiper-slide > div {
+          cursor: pointer !important;
+        }
+
+        #pix_section_showcase .swiper:active,
+        #pix_section_showcase .swiper-slide:active {
+          cursor: grabbing !important;
+        }
+
         #pix_section_showcase .showcase-bullet {
           display: inline-block;
           width: 8px;
@@ -73,48 +95,80 @@ export default function AppShowcaseSection() {
       `}</style>
 
       {/* Carousel Viewport with edge fade mask */}
-      <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
-        {isMounted ? (
-          <Swiper
-            modules={[Autoplay, Pagination, Navigation]}
-            loop={true}
-            centeredSlides={true}
-            slidesPerView="auto"
-            spaceBetween={20}
-            speed={650}
-            grabCursor={true}
-            autoplay={{
-              delay: 2400,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            pagination={{
-              el: ".showcase-pagination",
-              clickable: true,
-              bulletClass: "showcase-bullet",
-              bulletActiveClass: "showcase-bullet-active",
-            }}
-            navigation={{
-              prevEl: ".showcase-prev-btn",
-              nextEl: ".showcase-next-btn",
-            }}
-            breakpoints={{
-              640: {
-                spaceBetween: 24,
-              },
-              1024: {
-                spaceBetween: 28,
-              },
-            }}
-            className="w-full !py-6"
-          >
-            {displayScreens.map((screen, idx) => (
-              <SwiperSlide
-                key={`${screen.id}-${idx}`}
-                className="!w-[230px] sm:!w-[265px] lg:!w-[295px] shrink-0"
-              >
+      <div className="relative w-full overflow-hidden cursor-pointer [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+        <div className="carousel-zoom-wrapper w-full">
+          {isMounted ? (
+            <Swiper
+              modules={[Autoplay, Pagination, Navigation]}
+              loop={true}
+              centeredSlides={true}
+              slidesPerView="auto"
+              spaceBetween={20}
+              speed={650}
+              grabCursor={true}
+              autoplay={{
+                delay: 2400,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              pagination={{
+                el: ".showcase-pagination",
+                clickable: true,
+                bulletClass: "showcase-bullet",
+                bulletActiveClass: "showcase-bullet-active",
+              }}
+              navigation={{
+                prevEl: ".showcase-prev-btn",
+                nextEl: ".showcase-next-btn",
+              }}
+              breakpoints={{
+                640: {
+                  spaceBetween: 24,
+                },
+                1024: {
+                  spaceBetween: 28,
+                },
+              }}
+              className="w-full !py-6"
+            >
+              {displayScreens.map((screen, idx) => (
+                <SwiperSlide
+                  key={`${screen.id}-${idx}`}
+                  className="!w-[230px] sm:!w-[265px] lg:!w-[295px] shrink-0"
+                >
+                  <div
+                    className="w-full rounded-[28px] sm:rounded-[34px] overflow-hidden bg-white border border-black/[0.06] shadow-[0_10px_30px_rgba(0,0,0,0.08)] cursor-pointer transition-all duration-300 hover:scale-[0.97] hover:shadow-[0_15px_35px_rgba(0,0,0,0.12)]"
+                    style={{
+                      aspectRatio: "375 / 760",
+                    }}
+                  >
+                    <div className="relative w-full h-full bg-zinc-50 overflow-hidden">
+                      <Image
+                        src={screen.src}
+                        alt={screen.alt}
+                        fill
+                        sizes="(max-width: 640px) 230px, (max-width: 1024px) 265px, 295px"
+                        priority={idx === 0 || idx === 1}
+                        className="w-full h-full object-cover object-top block pointer-events-none select-none"
+                      />
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            /* SSR Fallback Static Layout */
+            <div className="flex items-center justify-center gap-6 py-6 overflow-hidden">
+              {screens.slice(0, 5).map((screen, idx) => (
                 <div
-                  className="w-full rounded-[28px] sm:rounded-[34px] overflow-hidden bg-white border border-black/[0.06] shadow-[0_10px_30px_rgba(0,0,0,0.08)] cursor-pointer"
+                  key={`ssr-${screen.id}`}
+                  className={`w-[230px] sm:w-[265px] lg:w-[295px] shrink-0 rounded-[28px] sm:rounded-[34px] overflow-hidden bg-white border border-black/[0.06] ${
+                    idx === 2
+                      ? "scale-100 opacity-100 shadow-[0_25px_60px_-12px_rgba(0,0,0,0.18)]"
+                      : idx === 1 || idx === 3
+                      ? "scale-[0.93] opacity-75 shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                      : "scale-[0.86] opacity-45 shadow-none"
+                  }`}
                   style={{
                     aspectRatio: "375 / 760",
                   }}
@@ -125,45 +179,15 @@ export default function AppShowcaseSection() {
                       alt={screen.alt}
                       fill
                       sizes="(max-width: 640px) 230px, (max-width: 1024px) 265px, 295px"
-                      priority={idx === 0 || idx === 1}
-                      className="w-full h-full object-cover object-top block pointer-events-none select-none"
+                      priority={idx === 2}
+                      className="w-full h-full object-cover object-top block"
                     />
                   </div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : (
-          /* SSR Fallback Static Layout */
-          <div className="flex items-center justify-center gap-6 py-6 overflow-hidden">
-            {screens.slice(0, 5).map((screen, idx) => (
-              <div
-                key={`ssr-${screen.id}`}
-                className={`w-[230px] sm:w-[265px] lg:w-[295px] shrink-0 rounded-[28px] sm:rounded-[34px] overflow-hidden bg-white border border-black/[0.06] ${
-                  idx === 2
-                    ? "scale-100 opacity-100 shadow-[0_25px_60px_-12px_rgba(0,0,0,0.18)]"
-                    : idx === 1 || idx === 3
-                    ? "scale-[0.93] opacity-75 shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
-                    : "scale-[0.86] opacity-45 shadow-none"
-                }`}
-                style={{
-                  aspectRatio: "375 / 760",
-                }}
-              >
-                <div className="relative w-full h-full bg-zinc-50 overflow-hidden">
-                  <Image
-                    src={screen.src}
-                    alt={screen.alt}
-                    fill
-                    sizes="(max-width: 640px) 230px, (max-width: 1024px) 265px, 295px"
-                    priority={idx === 2}
-                    className="w-full h-full object-cover object-top block"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Floating Left Navigation Button */}
         <button

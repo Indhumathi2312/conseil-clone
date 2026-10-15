@@ -70,6 +70,16 @@
   animation: float-slow 4s ease-in-out infinite;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-vertical-up,
+  .animate-marquee-vertical-down,
+  .animate-marquee-vertical-up-alt,
+  .animate-float {
+    animation: none !important;
+  }
+}
+
 /* Glassmorphism & header blur */
 .glass-header {
   background: rgba(255, 255, 255, 0.85);
@@ -143,4 +153,15 @@
 
 .animate-fade-in {
   animation: fade-in 0.25s ease-out forwards;
+}
+
+/* Hide Next.js Development Indicator / Watermark */
+nextjs-portal,
+#nextjs-dev-overlay,
+[data-nextjs-dev-tools-button],
+div[data-nextjs-dev-tools-button] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
