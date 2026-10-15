@@ -1,22 +1,25 @@
 import { ASSETS } from "@/lib/assets";
 
 export const platformScaleData = {
-  badge: "Digital Excellence",
+  id: "platform-scale",
+  badge: "Cloud Architecture",
   heading: "Creating Reliable Platforms That Scale With Your Business",
-  description: "We focus on systems that reduce complexity while enabling flexibility. The result is a product experience that feels intuitive.",
-  highlights: [
-    "Enterprise infrastructure designed for millions of requests",
-    "Secure processing and tokenized data architecture",
-    "Adaptive payment gateways with global multi-currency support",
-  ],
+  description:
+    "We focus on systems that reduce complexity while enabling flexibility. The result is a product experience that feels intuitive.",
   buttons: [
-    { label: "Join Our Network", href: "#", variant: "primary" },
-    { label: "Launch Your Product", href: "#", variant: "light" },
+    { label: "Launch Your Product", href: "#" },
   ],
+  digitalCard: {
+    title: "Digital Excellence",
+    description:
+      "Optimized structure ensures fast loading and smooth interactions.",
+    button: { label: "Join Our Network", href: "#" },
+  },
   image: {
     src: ASSETS.credit_card_1,
-    alt: "Reliable platforms credit card illustration",
+    alt: "Creating Reliable Platforms credit card illustration",
   },
 };
 
 export default platformScaleData;
+

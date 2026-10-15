@@ -101,3 +101,46 @@
   color: #000000;
   transform: translateY(-1px);
 }
+
+/* Logo Interactive Click Animations */
+@keyframes logo-spring-bounce {
+  0% { transform: scale(1); }
+  25% { transform: scale(0.9); }
+  50% { transform: scale(1.18) translateY(-4px); }
+  75% { transform: scale(0.98) translateY(1px); }
+  100% { transform: scale(1); }
+}
+
+@keyframes icon-pop {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.25); }
+  50% { transform: rotate(8deg) scale(1.28); }
+  75% { transform: rotate(-3deg) scale(1.1); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes ripple-pulse {
+  0% { transform: scale(0.85); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.animate-logo-bounce {
+  animation: logo-spring-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-icon-pop {
+  animation: icon-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-ripple {
+  animation: ripple-pulse 0.6s ease-out forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out forwards;
+}

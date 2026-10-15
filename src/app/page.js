@@ -6,7 +6,7 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import PlatformScaleSection from "@/components/sections/PlatformScaleSection";
 import ProductivityDesignSection from "@/components/sections/ProductivityDesignSection";
 import GlobalSolutionsSection from "@/components/sections/GlobalSolutionsSection";
-import StartupTimeSection from "@/components/sections/StartupTimeSection";
+import StartupShowcaseSection from "@/components/sections/StartupShowcaseSection";
 import SmartToolsSection from "@/components/sections/SmartToolsSection";
 import ReviewsSection from "@/components/sections/ReviewsSection";
 import PricingSection from "@/components/sections/PricingSection";
@@ -39,8 +39,8 @@ export default function Home() {
         {/* Section 5: Global Solutions & Partner Logos */}
         <GlobalSolutionsSection />
 
-        {/* Section 6: Startup Time Showcase */}
-        <StartupTimeSection />
+        {/* Section 6: Startup Showcase Section (Maximize Your Startup Time) */}
+        <StartupShowcaseSection />
 
         {/* Section 7: Smart Tools Features */}
         <SmartToolsSection />
